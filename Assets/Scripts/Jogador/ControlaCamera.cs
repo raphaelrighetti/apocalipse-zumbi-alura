@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class ControlaCamera : MonoBehaviour
 {
-    public GameObject jogador;
+
+    public GameObject Jogador;
 
     private Vector3 distanciaCompensar;
 
     void Start()
     {
-        distanciaCompensar = transform.position - jogador.transform.position;
+        distanciaCompensar = transform.position - Jogador.transform.position;
     }
 
     void Update()
     {
-        transform.position = jogador.transform.position + distanciaCompensar;
+        transform.position = Jogador.transform.position + distanciaCompensar;
     }
 }

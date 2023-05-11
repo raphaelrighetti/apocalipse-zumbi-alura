@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class ControlaJogador : MonoBehaviour
 {
+
+    public float velocidade;
+
     private Animator animator;
 
     private Rigidbody physics;
 
     private Vector3 direcao;
-
-    public float velocidade;
 
     void Start()
     {
