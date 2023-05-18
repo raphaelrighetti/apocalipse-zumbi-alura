@@ -1,0 +1,202 @@
+============MATERIAIS============
+
+Materiais definem como o nosso objeto irá se comportar com a luz, ou seja, conseguimos usar diferentes materiais para deixarmos o nosso objeto reflexivo, fosco e etc.
+
+Definimos texturas nos próprios materiais, modificando a propriedade "Albedo" do material. As texturas normalmente já vêm com uma configuração de qual parte da textura deve ser aplicada dependendo do objeto que elas forem atribuídas (imagino que esses configurações são feitas realmente no modelo 3D, mas não tenho certeza).
+
+Conseguimos ver os filhos dos objetos que temos na nossa hierarquia na view de "Hierarchy", e lá conseguimos ver quais objetos estão com material ou não mais facilmente.
+
+============PREFAB============
+
+São objetos que já colocamos um material ou configurações personalizadas e salvamos eles com essas configurações para utilizarmos em qualquer lugar do nosso projeto.
+
+Podemos salvar um prefab apenas arrastando um objeto da hierarquia para o nosso project.
+
+============void Update()============
+
+Quase a mesma coisa que o "_process" da Godot, só que não recebe o "delta".
+
+============void FixedUpdate()============
+
+É um Update constante que não depende dos frames do jogo, ou seja, muito bom para físicas.
+
+============transform.Translate(<Vector3>)============
+
+Da mesma maneira que a Godot, a Unity nos permite acessar por código propriedades de objetos do nosso jogo.
+
+Neste caso, acessamos a propriedade "transform" e executamos o método "Translate", passando um "Vector3" em alguma direção (existem shorthands parecidos com enums que nos facilitam criar Vector3 nas direções que queremos)
+
+Podemos fazer dessa forma, mas é melhor fazermos mexendo diretamnte com a física do "Rigidbody".
+
+============Rigidbody.MovePosition(<Vector3>)============
+
+Similar ao "Translate", mas mas em vez de passarmos um Vector3 apenas com direção, devemos passar um Vector3 exatamente na posição que queremos que o objeto se mova.
+
+Felizmente, podemos calcular utilizando a posição de Rigidbody que fica atualizando sempre. 
+
+============Input.GetAxis(<nome do eixo>)============
+
+Input na Unity é similar ao Input da Godot, mas na Unity temos como definir eixos que representam valores na vertical, horizontal e etc. Esses eixos vão de -1 até 1 representando a direção do eixo.A Unity já possui alguns eixos definidos, como "Horizontal" e "Vertical", que usam as setas e WASD para os para definir o valor float que será retornado.
+
+============Time.deltaTime============
+
+Podemos pegar o valor do tempo entre cada frame com essa propriedade de "Time".
+
+Assim como na Godot, isso é útil para fazermos movimentações com valores baseados nos segundos, e não baseados nos frames que estão rodando, tendo em vista que o FPS pode variar e deixar movimentações do personagem inconsistentes.
+
+============VARIÁVEIS NA UI============
+
+Qualquer propriedade da nossa classe que for pública irá aparecer na UI da Unity.
+
+============ANIMAÇÕES============
+
+Animações funcionam de maneira similar às animações na Godot, ou seja, podemos ter uma animação grandona com vários frames e dividí-la em vários animações menores.
+
+Em vez de adicionar os frames um a um, podemos definir um começo e um fim para cada "Clip".
+
+Jogamos animações para nossos objetos apenas arrastando elas para o objeto que queremos. As animações ficam em um componente do objeto chamado "Animator".
+
+Temor uma telinha para o controller de animações que podemos criar lógicas de forma visual, é bem interessante de se ver.
+
+============GetComponent<>()============
+
+Podemos pegar qualquer componente do nosso objeto com esse método, assim conseguindo acessar propriedades desses componentes e etc.
+
+============COLISÕES============
+
+Podemos definir colisões para objetos adicionando componentes de "Collider" neles. Importante saber que não basta os objetos terem colisão para não conseguirmos mais atravessá-los, ao menos um objeto deve ter física, normalmente sendo o objeto do jogador.
+
+Objetos podem ter quantas colisões quisermos.
+
+Temos um "Mesh Collider", que pega o formato do nosso modelo 3D e aplica uma colisão com base no modelo, mas ele acaba sendo muito pesado de computar e não é aconselhado a ser utilizado em muitos objetos, apenas objetos mais simples.
+
+============Model============
+
+Models são nossos modelos 3D.
+
+Podemos definir propriedades como escala e outras coisas na aba "Model".
+
+Podemos definir o esqueleto do nosso modelo na aba "Rig", tendo alguns modelos padrões da unity, como por exemplo o "Humanoid".
+
+A aba de "Animations" é onde definimos as animações do nosso personagem.
+
+============normalized============
+
+É uma propriedade de Vector3 que armazena o valor normalizado (direção) do vetor.
+
+============float Vector3.Distance(<Vector3>, Vector3)============
+
+Esse método estático nos retorna um float com a distância entre um Vector3 e outro.
+
+============Quaternion============
+
+É uma classe que representa uma rotação.
+
+============Quaternion.LookRotation(Vector3)============
+
+É um método que retorna um Quaternion de rotação a partir de uma direção (Vector3).
+
+============PRENDENDO MODELOS NO RIG============
+
+Podemos prender outros modelos 3D em um Rig já pronto nosso.
+
+Para isso, basta colocarmos ele na hierarquia do nosso objeto e deixá-lo como filho da parte do Rig que queremos.
+
+============MESCLANDO ANIMAÇÕES============
+
+Para mesclar animações, precisamos criar uma nova camada no nosso controller de animações do objeto em questão.
+
+Tendo criado a nova camada, temos que definir um "Avatar Mask", onde definimos as partes do nosso Avatar que serão afetadas por aquela animação para a camada que criamos, assim como definir um peso, que é a intensidade com que a animação será aplicada.
+
+============Instantiate============
+
+É o método utilizado para inserirmos novos objetos na nossa cena.
+
+============COPIANDO COMPONENTES============
+
+Podemos copiar valores dos componentes pelo UI da Unity, assim podendo colar todos os valores exatamente da mesma em outro componente do mesmo tipo. Muito útil para salvar informações quando o jogo está rodando.
+
+============Ray============
+
+É uma classe que representa um raio que podemos utilizar para fazer um ray cast.
+
+============Camera.main============
+
+Essa propriedade nos retorna a câmera principal do nosso level.
+
+Podemos utilizar o método "ScreenPointToRay(<Vector3>)" para pegarmos um raio da câmera até a posição passada, que pode ser a "Input.mousePosition", por exemplo.
+
+============Debug============
+
+É uma classe que contém métodos que nos permitem printar coisas no console, mostrar colisões quando rodamos o jogo e fazer ações de debug no geral.
+
+Podemos utilizar o método "DrawRay(<Vector3 start>, <Vector3 direction>, <Color>)". Os dois primeiros argumentos podemos pegar do nosso objeto "Ray" com as propriedades "origin" e "direction". É importante lembrar que o raio irá ficar pequenininho, pois a direção é curta. Podemos resolver isso e aumentar o tamanho do raio multiplicando o valor de "raio.direction" por algum valor alto.
+
+============RaycastHit============
+
+É uma classe que pega o nosso raio e guarda a informação de onde ele está tocando o chão.
+
+============out============
+
+É uma palavra chave do C# que serve para tornarmos possível passar uma variável não iniciada como parâmetro de um método.
+
+============Physics.Raycast()============
+
+Serve para realmente fazermos o nosso ray cast.
+
+Parâmetros:
+
+    1. Ray raio
+    2. out RaycastHit hitInfo
+    3. float maxDistance
+    4. (opcional) LayerMask mask
+
+============LayerMask============
+
+É uma classe que nos permite criar uma máscara de "Layer", assim contendo apenas os objetos que foram da camada que passamos nessa máscara.
+
+Muito útil quando estamos trabalhando com Raycast e queremos ignorar certos objetos.
+
+============Tag============
+
+Similar às Layers, Tags servem para marcarmos objetos com alguma Tag.
+
+Isso é útil para diferenciar inimigos de objetos do cenário, por exemplo.
+
+============Is Trigger============
+
+É uma propriedade de "Rigidbody" onde definimos se o objeto em questão deve usar gatilhos de colisão com outros objetos ao invés de realmente aplicar a colisão.
+
+Isso faz com que o objeto em questão atravesse outras colisões, porém a Unity ainda computa as colisões que teriam acontecido.
+
+============OnTriggerEnter(<Collider other>)============
+
+Parecido com os métodos que escutam sinais na Godot.
+
+Esse método é chamado quando algum objeto entra na colisão do nosso objeto em questão (se o objeto em questão for um Trigger).
+
+============Destroy(<GameObject>)============
+
+É o método que utilizamos para remover objetos da nossa cena.
+
+============EVENTOS EM ANIMAÇÕES============
+
+Podemos criar eventos que serão disparados em momentos específicos das nossas animações na aba "Events" da animação.
+
+Esses eventos serão métodos disparados no nosso script do objeto que possui a animação em questão. Para que funcione, temos que declarar o método no script com exatamente o mesmo nome que demos para o evento.
+
+============Canvas============
+
+É um canvas onde podemos colocar os nossos elementos de UI.
+
+============Text============
+
+Representa um elemento de UI que é um texto, com várias opções para estilizarmos o nosso texto.
+
+Podemos fazê-lo aparecer e desaparecer por código utilizando o método "SetActive(<nome>, <bool>);
+
+============using UnityEngine.SceneManagement;============
+
+Utilizamos a palavra-chave "using" para importar "namespaces".
+
+Esse namespace contém algumas classes que nos permitem trabalhar com as nossas cenas, como por exemplo a "SceneManager", que nos possibilita carregar cenas com o método "LoadScene(<nome da cena>)".

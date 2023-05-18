@@ -2696,6 +2696,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidade: 10
+  mascaraChao:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &1448913838473332410
 MonoBehaviour:
   m_ObjectHideFlags: 0

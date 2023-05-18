@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bala : MonoBehaviour
 {
 
-    public float velocidade;
+    public float Velocidade;
 
     private Rigidbody physics;
 
@@ -16,6 +16,16 @@ public class Bala : MonoBehaviour
 
     void Update()
     {
-        physics.MovePosition(physics.position + (transform.forward * (velocidade * Time.deltaTime)));
+        physics.MovePosition(physics.position + (transform.forward * (Velocidade * Time.deltaTime)));
+    }
+
+    void OnTriggerEnter(Collider objetoDeColisao)
+    {
+        if (objetoDeColisao.tag == "Inimigo")
+        {
+            Destroy(objetoDeColisao.gameObject);
+        }
+
+        Destroy(gameObject);
     }
 }
