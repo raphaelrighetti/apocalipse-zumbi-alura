@@ -7,7 +7,7 @@ public class ControlaZumbi : MonoBehaviour
 
     public float Velocidade;
 
-    public GameObject Jogador;
+    private GameObject jogador;
 
     private Rigidbody physics;
 
@@ -19,13 +19,18 @@ public class ControlaZumbi : MonoBehaviour
     {
         physics = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        jogador = GameObject.FindWithTag("Jogador");
+
+        int zumbiEscolhido = Random.Range(1, 28);
+
+        transform.GetChild(zumbiEscolhido).gameObject.SetActive(true);
     }
 
     void FixedUpdate()
     {
-        Vector3 direcao = Jogador.transform.position - physics.position;
+        Vector3 direcao = jogador.transform.position - physics.position;
         Quaternion novaRotacao = Quaternion.LookRotation(direcao);
-        float distancia = Vector3.Distance(physics.position, Jogador.transform.position);
+        float distancia = Vector3.Distance(physics.position, jogador.transform.position);
 
         physics.MoveRotation(novaRotacao);
 
@@ -43,6 +48,6 @@ public class ControlaZumbi : MonoBehaviour
 
     void AtacaJogador()
     {
-        Jogador.GetComponent<ControlaJogador>().GameOver();
+        jogador.GetComponent<ControlaJogador>().GameOver();
     }
 }
