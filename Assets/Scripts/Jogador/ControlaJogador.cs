@@ -10,6 +10,8 @@ public class ControlaJogador : MonoBehaviour
 
     public int Vida;
 
+    public AudioClip SomDano;
+
     public LayerMask MascaraChao;
 
     public LayerMask MascaraParede;
@@ -92,6 +94,8 @@ public class ControlaJogador : MonoBehaviour
 
         ScriptControlaUI.AtualizaSliderVidaJogador();
 
+        ControlaAudio.instancia.PlayOneShot(SomDano);
+
         if (Vida <= 0)
         {
             Time.timeScale = 0;
@@ -103,10 +107,13 @@ public class ControlaJogador : MonoBehaviour
     {
         float maxDistance = 1;
 
-        encostandoForward = Physics.Raycast(transform.position, Vector3.forward, maxDistance, MascaraParede);
-        encostandoRight = Physics.Raycast(transform.position, Vector3.right, maxDistance, MascaraParede);
-        encostandoBack = Physics.Raycast(transform.position, Vector3.back, maxDistance, MascaraParede);
-        encostandoLeft = Physics.Raycast(transform.position, Vector3.left, maxDistance, MascaraParede);
+        Vector3 posicaoRaio = transform.position;
+        posicaoRaio.y = 1;
+
+        encostandoForward = Physics.Raycast(posicaoRaio, Vector3.forward, maxDistance);
+        encostandoRight = Physics.Raycast(posicaoRaio, Vector3.right, maxDistance);
+        encostandoBack = Physics.Raycast(posicaoRaio, Vector3.back, maxDistance);
+        encostandoLeft = Physics.Raycast(posicaoRaio, Vector3.left, maxDistance);
     }
 
     private void AjustaDirecao()

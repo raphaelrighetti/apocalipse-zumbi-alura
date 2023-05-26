@@ -23,7 +23,7 @@ public class Bala : MonoBehaviour
     {
         if (objetoDeColisao.tag == "Inimigo")
         {
-            Destroy(objetoDeColisao.gameObject);
+            objetoDeColisao.GetComponent<ControlaZumbi>().Morrer();
         }
 
         Destroy(gameObject);

@@ -11,6 +11,8 @@ public class ControlaZumbi : MonoBehaviour
 
     public int DanoMaximo;
 
+    public AudioClip SomMorte;
+
     private GameObject jogador;
 
     private Rigidbody physics;
@@ -50,7 +52,13 @@ public class ControlaZumbi : MonoBehaviour
         }
     }
 
-    void AtacaJogador()
+    public void Morrer()
+    {
+        ControlaAudio.instancia.PlayOneShot(SomMorte);
+        Destroy(gameObject);
+    }
+
+    private void AtacaJogador()
     {
         int dano = Random.Range(DanoMinimo, DanoMaximo + 1);
 
