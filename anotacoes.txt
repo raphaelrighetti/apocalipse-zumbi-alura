@@ -200,3 +200,69 @@ Podemos fazê-lo aparecer e desaparecer por código utilizando o método "SetAct
 Utilizamos a palavra-chave "using" para importar "namespaces".
 
 Esse namespace contém algumas classes que nos permitem trabalhar com as nossas cenas, como por exemplo a "SceneManager", que nos possibilita carregar cenas com o método "LoadScene(<nome da cena>)".
+
+============GameObject.FindWithTag(<nome>)============
+
+Método utilizado para acharmos o objeto na cena que contém a tag passada.
+
+============Random.Range(<int>, <int>)============
+
+"Random" é a classe utilizada para gerar coisas aleatórias na Unity.
+
+Podemos utilizar o método "Range()" para gerar um inteiro aleatório em um range passado (número final não incluído).
+
+============transform.GetChild(<int index>)============
+
+Método utilizado para pegarmos um objeto filho de um objeto a partir de seu índice.
+
+============RESOLVENDO COLISÕES============
+
+Para o jogador não atravessar colisões na diagonal ou quando sua velocidade for muito alta, basta criarmos Raycasts em todas as direções e zerar o Vector3 de direção na direção que ele não pode mais ir.
+
+============using UnityEngine.UI;============
+
+Precisamos utilizar esse namespace para conseguirmos acessar nossos elementos de interface no nosso código, como o "Slider", por exemplo.
+
+============SLIDER UI============
+
+É um slider que podemos utilizar para representar valores de propriedades na nossa UI.
+
+Importante saber que ela vem interativa por padrão, assim permitindo com que o jogador arraste o valor dela. Podemos modificar isso.
+
+O Slider vem com alguns objetos filhos que podemos modificar e remover para deixar do jeito que a gente quer, assim como podemos mexer em muitas outras coisas nesses objetos.
+
+============ÂNCORA============
+
+São as âncoras que definem a posição responsiva dos nossos objetos na UI.
+
+Possui vários presets e podemos personalizar, fazendo com que o elemento sempre fique em determinado canto da tela ou algo do tipo.
+
+============SLICE SPRITE============
+
+Podemos definir um slice para nosso sprite (que podemos utilizar em elementos de UI ou jogos 2D) a partir do "Sprite Editor" da Unity.
+
+Isso é muito útil para definirmos onde a imagem deve ser cortada quando formos esticar ela e etc.
+
+Podemos mudar o tipo da imagem no "Fill" para "Sliced" quando aplicamos um slice no nosso sprite, assim fazendo com que ele não simplesmente estique a imagem no fill, e sim faça um recorte de cada parte.
+
+============Audio Source============
+
+É um componente que podemos utilizar como um source de áudio, para assim conseguirmos tocar uma música no nosso jogo, por exemplo.
+
+Precisa de um "Audio Listener" para ouvir esse "Audio Source", que já vem com a Main Camera da nossa cena. Esse Audio Listener é muito útil quando estamos trabalhando com som 3D, nos dando a possibilidade de colocar o Audio Listener no jogador e fazer com que o som só seja escutável quando estivermos perto de onde ele está sendo tocado, por exemplo.
+
+============AudioClip============
+
+É uma classe que representa um clipe de áudio que podemos guardar no nosso código.
+
+============void Awake() {}============
+
+É um método que roda antes mesmo do start. Muito útil para conseguirmos fazer algo no início do jogo, por exemplo.
+
+============DirectionalLight============
+
+É um objeto que utilizamos para controlar a luz no nosso jogo.
+
+Nele podemos definir a rotação, que irá mudar a posição do "sol", a intensidade da luz, a cor da luz e outras coisas.
+
+É bem interessante de mexer.

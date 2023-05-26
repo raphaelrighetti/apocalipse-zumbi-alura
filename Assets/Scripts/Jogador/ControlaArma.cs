@@ -13,10 +13,17 @@ public class ControlaArma : MonoBehaviour
 
     void Update()
     {
+        GameObject balaRef = null;
+
         if (Input.GetButtonDown("Fire1"))
         {
-            Instantiate(Bala, CanoDaArma.transform.position, CanoDaArma.transform.rotation);
+            balaRef = Instantiate(Bala, CanoDaArma.transform.position, CanoDaArma.transform.rotation);
             ControlaAudio.instancia.PlayOneShot(SomTiro);
+        }
+
+        if (balaRef != null)
+        {
+            Destroy(balaRef, 3);
         }
     }
 }

@@ -176,7 +176,20 @@ ModelImporter:
       might lower retargeting quality:\nNote: Activate translation DOF on avatar
       to improve retargeting quality.\n\t'Body_jnt' has translation animation that
       will be discarded.\n"
-    animationRetargetingWarnings: 
+    animationRetargetingWarnings: "\nRetargeting quality report for clip 'Take 001':\n\tLeftLowerLeg
+      average position error 2.3 mm and maximum position error 5.2 mm at time 27:13
+      (7.1%) Frame 823\n\tRightLowerLeg average position error 1.2 mm and maximum
+      position error 11.4 mm at time 34:21 (70.9%) Frame 1041\n\tLeftUpperArm average
+      position error 10.1 mm and maximum position error 53.6 mm at time 29: 4 (22.1%)
+      Frame 874\n\tLeftLowerArm average position error 11.3 mm and maximum position
+      error 46.4 mm at time 29: 5 (22.4%) Frame 875\n\tLeftHand average position
+      error 10.1 mm and maximum position error 53.6 mm at time 29: 4 (22.1%) Frame
+      874\n\tRightUpperArm average position error 10.1 mm and maximum position error
+      53.6 mm at time 29: 4 (22.1%) Frame 874\n\tRightLowerArm average position error
+      10.1 mm and maximum position error 55.0 mm at time 29: 4 (22.1%) Frame 874\n\tRightHand
+      average position error 10.1 mm and maximum position error 53.6 mm at time 29:
+      4 (22.1%) Frame 874\n\tHead average position error 10.1 mm and maximum position
+      error 53.6 mm at time 29: 4 (22.1%) Frame 874\n"
     animationDoRetargetingWarnings: 1
     importAnimatedCustomProperties: 0
     importConstraints: 0
@@ -214,7 +227,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.49677414
-        functionName: AtacaJogador
+        functionName: AtacarJogador
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

@@ -15,7 +15,7 @@ public class ControlaZumbi : MonoBehaviour
 
     private GameObject jogador;
 
-    private Rigidbody physics;
+    private Rigidbody rb;
 
     private Animator animator;
 
@@ -23,26 +23,24 @@ public class ControlaZumbi : MonoBehaviour
 
     void Start()
     {
-        physics = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         jogador = GameObject.FindWithTag("Jogador");
 
-        int zumbiEscolhido = Random.Range(1, 28);
-
-        transform.GetChild(zumbiEscolhido).gameObject.SetActive(true);
+        EscolherSkin();
     }
 
     void FixedUpdate()
     {
-        Vector3 direcao = jogador.transform.position - physics.position;
+        Vector3 direcao = jogador.transform.position - rb.position;
         Quaternion novaRotacao = Quaternion.LookRotation(direcao);
-        float distancia = Vector3.Distance(physics.position, jogador.transform.position);
+        float distancia = Vector3.Distance(rb.position, jogador.transform.position);
 
-        physics.MoveRotation(novaRotacao);
+        rb.MoveRotation(novaRotacao);
 
         if (distancia > 2.5)
         {
-            physics.MovePosition(physics.position + (direcao.normalized * (Velocidade * Time.deltaTime)));
+            rb.MovePosition(rb.position + (direcao.normalized * (Velocidade * Time.deltaTime)));
 
             animator.SetBool("Atacando", false);
         }
@@ -54,11 +52,19 @@ public class ControlaZumbi : MonoBehaviour
 
     public void Morrer()
     {
-        ControlaAudio.instancia.PlayOneShot(SomMorte);
         Destroy(gameObject);
+
+        ControlaAudio.instancia.PlayOneShot(SomMorte);
     }
 
-    private void AtacaJogador()
+    private void EscolherSkin()
+    {
+        int zumbiEscolhido = Random.Range(1, 28);
+
+        transform.GetChild(zumbiEscolhido).gameObject.SetActive(true);
+    }
+
+    private void AtacarJogador()
     {
         int dano = Random.Range(DanoMinimo, DanoMaximo + 1);
 

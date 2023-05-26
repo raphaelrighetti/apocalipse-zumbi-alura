@@ -20,24 +20,19 @@ public class ControlaJogador : MonoBehaviour
 
     public ControlaUI ScriptControlaUI;
 
-    private bool encostandoForward;
-
-    private bool encostandoRight;
-
-    private bool encostandoBack;
-
-    private bool encostandoLeft;
+    private Vector3 direcao;
 
     private Animator animator;
 
-    private Rigidbody physics;
+    private Rigidbody rb;
 
-    private Vector3 direcao;
+    private AjustaDirecao ajustaDirecao;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        physics = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
+        ajustaDirecao = GetComponent<AjustaDirecao>();
 
         Time.timeScale = 1;
     }
@@ -48,44 +43,21 @@ public class ControlaJogador : MonoBehaviour
         float eixoZ = Input.GetAxis("Vertical");
 
         direcao = new Vector3(eixoX, 0, eixoZ);
+        direcao = ajustaDirecao.Ajustar(transform.position, direcao);
 
-        EncostandoParede();
-        AjustaDirecao();
-
-        if (direcao != Vector3.zero)
-        {
-            animator.SetBool("Movendo", true);
-        }
-        else
-        {
-            animator.SetBool("Movendo", false);
-        }
+        TocarAnimacao();
 
         if (Vida <= 0)
         {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                SceneManager.LoadScene("Game");
-            }
+            Restart();
         }
     }
 
     void FixedUpdate()
     {
-        physics.MovePosition(physics.position + (direcao * (Velocidade * Time.deltaTime)));
+        rb.MovePosition(rb.position + (direcao * (Velocidade * Time.deltaTime)));
 
-        Ray raio = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit impacto;
-
-        if (Physics.Raycast(raio, out impacto, 100))
-        {
-            Vector3 posicaoMira = impacto.point - physics.position;
-            posicaoMira.y = 0;
-
-            Quaternion novaRotacao = Quaternion.LookRotation(posicaoMira);
-
-            physics.MoveRotation(novaRotacao);
-        }
+        RotacionarMira();
     }
 
     public void TomarDano(int dano)
@@ -103,39 +75,39 @@ public class ControlaJogador : MonoBehaviour
         }
     }
 
-    private void EncostandoParede()
+    private void RotacionarMira()
     {
-        float maxDistance = 1;
+        Ray raio = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit impacto;
 
-        Vector3 posicaoRaio = transform.position;
-        posicaoRaio.y = 1;
+        if (Physics.Raycast(raio, out impacto, 100))
+        {
+            Vector3 posicaoMira = impacto.point - rb.position;
+            posicaoMira.y = 0;
 
-        encostandoForward = Physics.Raycast(posicaoRaio, Vector3.forward, maxDistance);
-        encostandoRight = Physics.Raycast(posicaoRaio, Vector3.right, maxDistance);
-        encostandoBack = Physics.Raycast(posicaoRaio, Vector3.back, maxDistance);
-        encostandoLeft = Physics.Raycast(posicaoRaio, Vector3.left, maxDistance);
+            Quaternion novaRotacao = Quaternion.LookRotation(posicaoMira);
+
+            rb.MoveRotation(novaRotacao);
+        }
     }
 
-    private void AjustaDirecao()
+    private void TocarAnimacao()
     {
-        if (encostandoForward && direcao.z > 0)
+        if (direcao != Vector3.zero)
         {
-            direcao.z = 0;
+            animator.SetBool("Movendo", true);
         }
-
-        if (encostandoRight && direcao.x > 0)
+        else
         {
-            direcao.x = 0;
+            animator.SetBool("Movendo", false);
         }
+    }
 
-        if (encostandoBack && direcao.z < 0)
+    private void Restart()
+    {
+        if (Input.GetButtonDown("Fire1"))
         {
-            direcao.z = 0;
-        }
-
-        if (encostandoLeft && direcao.x < 0)
-        {
-            direcao.x = 0;
+            SceneManager.LoadScene("Game");
         }
     }
 }

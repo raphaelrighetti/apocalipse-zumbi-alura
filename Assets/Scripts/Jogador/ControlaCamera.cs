@@ -14,7 +14,7 @@ public class ControlaCamera : MonoBehaviour
         distanciaCompensar = transform.position - Jogador.transform.position;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         transform.position = Jogador.transform.position + distanciaCompensar;
     }
