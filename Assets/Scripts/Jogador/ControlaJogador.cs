@@ -8,11 +8,23 @@ public class ControlaJogador : MonoBehaviour
 
     public float Velocidade;
 
-    public bool Vivo;
+    public int Vida;
 
     public LayerMask MascaraChao;
 
+    public LayerMask MascaraParede;
+
     public GameObject TextoGameOver;
+
+    public ControlaUI ScriptControlaUI;
+
+    private bool encostandoForward;
+
+    private bool encostandoRight;
+
+    private bool encostandoBack;
+
+    private bool encostandoLeft;
 
     private Animator animator;
 
@@ -35,6 +47,9 @@ public class ControlaJogador : MonoBehaviour
 
         direcao = new Vector3(eixoX, 0, eixoZ);
 
+        EncostandoParede();
+        AjustaDirecao();
+
         if (direcao != Vector3.zero)
         {
             animator.SetBool("Movendo", true);
@@ -44,7 +59,7 @@ public class ControlaJogador : MonoBehaviour
             animator.SetBool("Movendo", false);
         }
 
-        if (!Vivo)
+        if (Vida <= 0)
         {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -63,7 +78,7 @@ public class ControlaJogador : MonoBehaviour
         if (Physics.Raycast(raio, out impacto, 100))
         {
             Vector3 posicaoMira = impacto.point - physics.position;
-            posicaoMira.y = physics.position.y;
+            posicaoMira.y = 0;
 
             Quaternion novaRotacao = Quaternion.LookRotation(posicaoMira);
 
@@ -71,10 +86,49 @@ public class ControlaJogador : MonoBehaviour
         }
     }
 
-    public void GameOver()
+    public void TomarDano(int dano)
     {
-        Time.timeScale = 0;
-        Vivo = false;
-        TextoGameOver.SetActive(true);
+        Vida -= dano;
+
+        ScriptControlaUI.AtualizaSliderVidaJogador();
+
+        if (Vida <= 0)
+        {
+            Time.timeScale = 0;
+            TextoGameOver.SetActive(true);
+        }
+    }
+
+    private void EncostandoParede()
+    {
+        float maxDistance = 1;
+
+        encostandoForward = Physics.Raycast(transform.position, Vector3.forward, maxDistance, MascaraParede);
+        encostandoRight = Physics.Raycast(transform.position, Vector3.right, maxDistance, MascaraParede);
+        encostandoBack = Physics.Raycast(transform.position, Vector3.back, maxDistance, MascaraParede);
+        encostandoLeft = Physics.Raycast(transform.position, Vector3.left, maxDistance, MascaraParede);
+    }
+
+    private void AjustaDirecao()
+    {
+        if (encostandoForward && direcao.z > 0)
+        {
+            direcao.z = 0;
+        }
+
+        if (encostandoRight && direcao.x > 0)
+        {
+            direcao.x = 0;
+        }
+
+        if (encostandoBack && direcao.z < 0)
+        {
+            direcao.z = 0;
+        }
+
+        if (encostandoLeft && direcao.x < 0)
+        {
+            direcao.x = 0;
+        }
     }
 }

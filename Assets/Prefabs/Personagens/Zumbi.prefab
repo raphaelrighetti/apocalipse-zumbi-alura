@@ -652,6 +652,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocidade: 5
+  DanoMinimo: 15
+  DanoMaximo: 30
 --- !u!54 &1131828085
 Rigidbody:
   m_ObjectHideFlags: 0

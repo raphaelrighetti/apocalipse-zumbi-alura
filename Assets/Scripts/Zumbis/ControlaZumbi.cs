@@ -7,6 +7,10 @@ public class ControlaZumbi : MonoBehaviour
 
     public float Velocidade;
 
+    public int DanoMinimo;
+
+    public int DanoMaximo;
+
     private GameObject jogador;
 
     private Rigidbody physics;
@@ -48,6 +52,8 @@ public class ControlaZumbi : MonoBehaviour
 
     void AtacaJogador()
     {
-        jogador.GetComponent<ControlaJogador>().GameOver();
+        int dano = Random.Range(DanoMinimo, DanoMaximo + 1);
+
+        jogador.GetComponent<ControlaJogador>().TomarDano(dano);
     }
 }
