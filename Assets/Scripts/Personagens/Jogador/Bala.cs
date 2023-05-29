@@ -7,10 +7,13 @@ public class Bala : MonoBehaviour
 
     public float Velocidade;
 
+    private int dano;
+
     private Rigidbody rb;
 
     void Start()
     {
+        dano = GameObject.FindWithTag("Jogador").GetComponent<StatusPersonagem>().Dano;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -23,7 +26,7 @@ public class Bala : MonoBehaviour
     {
         if (objetoDeColisao.tag == "Inimigo")
         {
-            objetoDeColisao.GetComponent<ControlaZumbi>().Morrer();
+            objetoDeColisao.GetComponent<ControlaZumbi>().TomarDano(dano);
         }
 
         Destroy(gameObject);

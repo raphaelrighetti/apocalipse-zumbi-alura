@@ -560,7 +560,9 @@ GameObject:
   - component: {fileID: 1131828082}
   - component: {fileID: 1131828085}
   - component: {fileID: 1131828086}
+  - component: {fileID: 3777645625990279552}
   - component: {fileID: 6060726666836229405}
+  - component: {fileID: 7312838317471886557}
   m_Layer: 0
   m_Name: Zumbi
   m_TagString: Inimigo
@@ -676,6 +678,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3777645625990279552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063500868937916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc2f0b6be47ccdc4eb7100f5785e5751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dano: 30
+  Vida: 1
+  Velocidade: 5
 --- !u!114 &6060726666836229405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,6 +709,18 @@ MonoBehaviour:
   DanoMinimo: 15
   DanoMaximo: 30
   SomMorte: {fileID: 8300000, guid: bb023afe16fe4c24bb19563c727a4610, type: 3}
+--- !u!114 &7312838317471886557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063500868937916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6b4b632219d14647a5cd95ffb927b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1065480718027956
 GameObject:
   m_ObjectHideFlags: 0

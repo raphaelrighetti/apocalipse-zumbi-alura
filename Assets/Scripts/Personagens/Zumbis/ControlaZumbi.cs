@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlaZumbi : MonoBehaviour
+public class ControlaZumbi : MonoBehaviour, IMatavel
 {
 
-    public float Velocidade;
-
-    public int DanoMinimo;
-
-    public int DanoMaximo;
 
     public AudioClip SomMorte;
+
+    private int danoMinimo;
+
+    private int danoMaximo;
 
     private GameObject jogador;
 
@@ -19,28 +18,36 @@ public class ControlaZumbi : MonoBehaviour
 
     private Animator animator;
 
+    private StatusPersonagem status;
+
+    private MovimentacaoPersonagem movimentacaoZumbi;
+
 
 
     void Start()
     {
+        jogador = GameObject.FindWithTag("Jogador");
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        jogador = GameObject.FindWithTag("Jogador");
+        status = GetComponent<StatusPersonagem>();
+        movimentacaoZumbi = GetComponent<MovimentacaoPersonagem>();
+
+        danoMinimo = status.Dano / 2;
+        danoMaximo = status.Dano;
 
         EscolherSkin();
     }
 
     void FixedUpdate()
     {
-        Vector3 direcao = jogador.transform.position - rb.position;
-        Quaternion novaRotacao = Quaternion.LookRotation(direcao);
+        Vector3 direcao = (jogador.transform.position - rb.position).normalized;
         float distancia = Vector3.Distance(rb.position, jogador.transform.position);
 
-        rb.MoveRotation(novaRotacao);
+        movimentacaoZumbi.Rotacionar(direcao);
 
         if (distancia > 2.5)
         {
-            rb.MovePosition(rb.position + (direcao.normalized * (Velocidade * Time.deltaTime)));
+            movimentacaoZumbi.Movimentar(direcao, status.Velocidade);
 
             animator.SetBool("Atacando", false);
         }
@@ -50,11 +57,21 @@ public class ControlaZumbi : MonoBehaviour
         }
     }
 
+    public void TomarDano(int dano)
+    {
+        status.Vida -= dano;
+
+        ControlaAudio.instancia.PlayOneShot(SomMorte);
+
+        if (status.Vida <= 0)
+        {
+            Morrer();
+        }
+    }
+
     public void Morrer()
     {
         Destroy(gameObject);
-
-        ControlaAudio.instancia.PlayOneShot(SomMorte);
     }
 
     private void EscolherSkin()
@@ -66,7 +83,7 @@ public class ControlaZumbi : MonoBehaviour
 
     private void AtacarJogador()
     {
-        int dano = Random.Range(DanoMinimo, DanoMaximo + 1);
+        int dano = Random.Range(danoMinimo, danoMaximo + 1);
 
         jogador.GetComponent<ControlaJogador>().TomarDano(dano);
     }

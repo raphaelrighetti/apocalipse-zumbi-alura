@@ -8,18 +8,18 @@ public class ControlaUI : MonoBehaviour
 
     public Slider SliderVidaJogador;
 
-    private ControlaJogador scriptControlaJogador;
+    private StatusPersonagem status;
 
     void Start()
     {
-        scriptControlaJogador = GameObject.FindWithTag("Jogador").GetComponent<ControlaJogador>();
+        status = GameObject.FindWithTag("Jogador").GetComponent<StatusPersonagem>();
 
-        SliderVidaJogador.maxValue = scriptControlaJogador.Vida;
+        SliderVidaJogador.maxValue = status.Vida;
         AtualizaSliderVidaJogador();
     }
 
     public void AtualizaSliderVidaJogador()
     {
-        SliderVidaJogador.value = scriptControlaJogador.Vida;
+        SliderVidaJogador.value = status.Vida;
     }
 }

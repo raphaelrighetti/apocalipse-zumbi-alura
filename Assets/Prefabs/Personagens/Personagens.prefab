@@ -2584,8 +2584,10 @@ GameObject:
   - component: {fileID: 1228699339}
   - component: {fileID: 1228699338}
   - component: {fileID: 1228699336}
-  - component: {fileID: 1228699334}
+  - component: {fileID: 3716185044444436363}
+  - component: {fileID: 1228699333}
   - component: {fileID: 8739254938756656880}
+  - component: {fileID: 1228699334}
   - component: {fileID: 1448913838473332410}
   m_Layer: 0
   m_Name: Personagens
@@ -2684,6 +2686,45 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3716185044444436363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884102019447498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc2f0b6be47ccdc4eb7100f5785e5751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Vida: 100
+  Velocidade: 10
+--- !u!114 &1228699333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884102019447498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6b4b632219d14647a5cd95ffb927b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8739254938756656880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884102019447498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ca5fe9c88aa0f4091e1e8da24b61f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DistanciaMaxima: 1
 --- !u!114 &1228699334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2707,19 +2748,6 @@ MonoBehaviour:
     m_Bits: 128
   TextoGameOver: {fileID: 0}
   ScriptControlaUI: {fileID: 0}
---- !u!114 &8739254938756656880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1884102019447498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0ca5fe9c88aa0f4091e1e8da24b61f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DistanciaMaxima: 1
 --- !u!114 &1448913838473332410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2732,6 +2760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d51e9517dc7a3a4db5b35aaeb287353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CadenciaTiro: 0.25
   SomTiro: {fileID: 8300000, guid: 9ad8899b83508ea418363ecd9c126988, type: 3}
   Bala: {fileID: 4912030148735123531, guid: 48fe3ca8f4c1aa04ca75330cc40708b9, type: 3}
   CanoDaArma: {fileID: 420182017}

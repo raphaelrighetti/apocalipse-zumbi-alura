@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ControlaJogador : MonoBehaviour
+public class ControlaJogador : MonoBehaviour, IMatavel
 {
-
-    public float Velocidade;
-
-    public int Vida;
 
     public AudioClip SomDano;
 
@@ -26,12 +22,18 @@ public class ControlaJogador : MonoBehaviour
 
     private Rigidbody rb;
 
+    private StatusPersonagem status;
+
+    private MovimentacaoPersonagem movimentacaoJogador;
+
     private AjustaDirecao ajustaDirecao;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        status = GetComponent<StatusPersonagem>();
+        movimentacaoJogador = GetComponent<MovimentacaoPersonagem>();
         ajustaDirecao = GetComponent<AjustaDirecao>();
 
         Time.timeScale = 1;
@@ -45,9 +47,16 @@ public class ControlaJogador : MonoBehaviour
         direcao = new Vector3(eixoX, 0, eixoZ);
         direcao = ajustaDirecao.Ajustar(transform.position, direcao);
 
-        TocarAnimacao();
+        if (direcao != Vector3.zero)
+        {
+            animator.SetBool("Movendo", true);
+        }
+        else
+        {
+            animator.SetBool("Movendo", false);
+        }
 
-        if (Vida <= 0)
+        if (status.Vida <= 0)
         {
             Restart();
         }
@@ -55,24 +64,9 @@ public class ControlaJogador : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + (direcao * (Velocidade * Time.deltaTime)));
+        movimentacaoJogador.Movimentar(direcao, status.Velocidade);
 
         RotacionarMira();
-    }
-
-    public void TomarDano(int dano)
-    {
-        Vida -= dano;
-
-        ScriptControlaUI.AtualizaSliderVidaJogador();
-
-        ControlaAudio.instancia.PlayOneShot(SomDano);
-
-        if (Vida <= 0)
-        {
-            Time.timeScale = 0;
-            TextoGameOver.SetActive(true);
-        }
     }
 
     private void RotacionarMira()
@@ -83,23 +77,8 @@ public class ControlaJogador : MonoBehaviour
         if (Physics.Raycast(raio, out impacto, 100))
         {
             Vector3 posicaoMira = impacto.point - rb.position;
-            posicaoMira.y = 0;
 
-            Quaternion novaRotacao = Quaternion.LookRotation(posicaoMira);
-
-            rb.MoveRotation(novaRotacao);
-        }
-    }
-
-    private void TocarAnimacao()
-    {
-        if (direcao != Vector3.zero)
-        {
-            animator.SetBool("Movendo", true);
-        }
-        else
-        {
-            animator.SetBool("Movendo", false);
+            movimentacaoJogador.Rotacionar(posicaoMira);
         }
     }
 
@@ -109,5 +88,25 @@ public class ControlaJogador : MonoBehaviour
         {
             SceneManager.LoadScene("Game");
         }
+    }
+
+    public void TomarDano(int dano)
+    {
+        status.Vida -= dano;
+
+        ScriptControlaUI.AtualizaSliderVidaJogador();
+
+        ControlaAudio.instancia.PlayOneShot(SomDano);
+
+        if (status.Vida <= 0)
+        {
+            Morrer();
+        }
+    }
+
+    public void Morrer()
+    {
+        Time.timeScale = 0;
+        TextoGameOver.SetActive(true);
     }
 }
