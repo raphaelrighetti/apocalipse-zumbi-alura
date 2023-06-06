@@ -5,9 +5,7 @@ using UnityEngine.UI;
 
 public class ControlaUI : MonoBehaviour
 {
-
     public Slider SliderVidaJogador;
-
     private StatusPersonagem status;
 
     void Start()

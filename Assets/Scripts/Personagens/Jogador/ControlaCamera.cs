@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class ControlaCamera : MonoBehaviour
 {
-
     public GameObject Jogador;
-
     private Vector3 distanciaCompensar;
 
     void Start()

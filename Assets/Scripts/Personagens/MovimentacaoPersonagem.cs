@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MovimentacaoPersonagem : MonoBehaviour
 {
-
     private Rigidbody rb;
 
     void Start()

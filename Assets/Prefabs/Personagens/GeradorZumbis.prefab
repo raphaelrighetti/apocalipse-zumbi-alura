@@ -44,6 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acc74fdd426043141b87798f88c09dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TempoSpawn: 0.2
   ProbabilidadeSpawn: 10
+  TempoSpawn: 0.2
+  DistanciaSpawnMax: 4
+  DistanciaJogadorMin: 15
+  MascaraColisores:
+    serializedVersion: 2
+    m_Bits: 2432
   Zumbi: {fileID: 1063500868937916, guid: 35861510587b7489780fe86970823679, type: 3}

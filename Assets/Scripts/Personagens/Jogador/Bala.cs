@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class Bala : MonoBehaviour
 {
-
     public float Velocidade;
-
     private int dano;
-
     private Rigidbody rb;
 
     void Start()

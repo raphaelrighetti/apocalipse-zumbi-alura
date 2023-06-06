@@ -4,39 +4,66 @@ using UnityEngine;
 
 public class GeradorZumbis : MonoBehaviour
 {
-
-    public float TempoSpawn;
-
     public int ProbabilidadeSpawn;
-
+    public float TempoSpawn;
+    public float DistanciaSpawnMax;
+    public float DistanciaJogadorMin;
+    public LayerMask MascaraColisores;
     public GameObject Zumbi;
+    private float contadorSpawn = 0;
+    private float distanciaJogador;
+    private GameObject jogador;
 
-    private float contador = 0;
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, DistanciaSpawnMax);
+    }
 
     void Start()
     {
-
+        jogador = GameObject.FindWithTag("Jogador");
     }
-
 
     void Update()
     {
-        contador += Time.deltaTime;
+        distanciaJogador = Vector3.Distance(jogador.transform.position, transform.position);
+
+        contadorSpawn += Time.deltaTime;
         int numeroGerado = Random.Range(1, 100);
 
-        if (contador >= TempoSpawn)
+        if (contadorSpawn >= TempoSpawn)
         {
-            Spawn(numeroGerado);
+            StartCoroutine(Spawn(numeroGerado));
 
-            contador = 0;
+            contadorSpawn = 0;
         }
     }
 
-    void Spawn(int numeroGerado)
+    private IEnumerator Spawn(int numeroGerado)
     {
-        if (numeroGerado <= ProbabilidadeSpawn)
+        if (numeroGerado <= ProbabilidadeSpawn && distanciaJogador >= DistanciaJogadorMin)
         {
-            Instantiate(Zumbi, transform.position, transform.rotation);
+            Vector3 posicaoAleatoria = AleatorizarPosicao();
+            Collider[] colisores = Physics.OverlapSphere(posicaoAleatoria, 1, MascaraColisores);
+
+            while (colisores.Length > 0)
+            {
+                posicaoAleatoria = AleatorizarPosicao();
+                colisores = Physics.OverlapSphere(posicaoAleatoria, 1, MascaraColisores);
+                yield return null;
+            }
+
+            Instantiate(Zumbi, posicaoAleatoria, transform.rotation);
         }
+    }
+
+    private Vector3 AleatorizarPosicao()
+    {
+        Vector3 posicao = Random.insideUnitSphere * DistanciaSpawnMax;
+        posicao += transform.position;
+        posicao.y = transform.position.y;
+
+        return posicao;
     }
 }

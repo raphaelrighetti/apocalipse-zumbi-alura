@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class ControlaArma : MonoBehaviour
 {
-
     public float CadenciaTiro;
-
     public AudioClip SomTiro;
-
     public GameObject Bala;
-
     public GameObject CanoDaArma;
-
     private float contador;
 
     void Update()

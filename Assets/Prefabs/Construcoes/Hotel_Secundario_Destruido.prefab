@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1068917047875770785}
   - component: {fileID: 1068917047874804577}
   - component: {fileID: 673708492}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hotel_Secundario_Destruido
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,8 +97,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 37.065468, y: 5.3428125, z: 11.738013}
-  m_Center: {x: -0.16184235, y: 2.6714058, z: 1.6752694}
+  m_Size: {x: 39.00895, y: 5.3428125, z: 11.171676}
+  m_Center: {x: -1.133584, y: 2.6714058, z: 1.3921003}
 --- !u!1 &1068917047872538019
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 1068917047872379267}
   - component: {fileID: 1068917047875770787}
   - component: {fileID: 1068917047874804579}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SA_Bld_Motel_SideBuilding_Extras_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 1068917047872379269}
   - component: {fileID: 1068917047875770789}
   - component: {fileID: 1068917047874804581}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SA_Bld_Motel_SideBuilding_Growth_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

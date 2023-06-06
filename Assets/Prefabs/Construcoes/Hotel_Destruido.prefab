@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1635081648154138289}
   - component: {fileID: 1635081648153138289}
   - component: {fileID: 1706461073}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hotel_Destruido
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,8 +97,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 46.50924, y: 9.789794, z: 12.889259}
-  m_Center: {x: -1.9250822, y: 4.132277, z: -0.11143303}
+  m_Size: {x: 56.975388, y: 9.789794, z: 11.637739}
+  m_Center: {x: -4.1127625, y: 4.132277, z: -0.7371931}
 --- !u!1 &1635081648151136947
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 1635081648150714003}
   - component: {fileID: 1635081648154138291}
   - component: {fileID: 1635081648153138291}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SA_Bld_Motel_Damaged_Extras_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 1635081648150714005}
   - component: {fileID: 1635081648154138293}
   - component: {fileID: 1635081648153138293}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SA_Bld_Motel_Damaged_Growth_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

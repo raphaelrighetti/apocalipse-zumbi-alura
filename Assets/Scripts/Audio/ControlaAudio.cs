@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class ControlaAudio : MonoBehaviour
 {
-
     [HideInInspector]
     public static AudioSource instancia;
-
     private AudioSource audioSource;
 
     void Awake()
