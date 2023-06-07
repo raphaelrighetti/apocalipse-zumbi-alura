@@ -56,6 +56,7 @@ public class ControlaZumbi : MonoBehaviour, IMatavel
         }
         else
         {
+            direcao = (jogador.transform.position - rb.position).normalized;
             animator.SetBool("Atacando", true);
         }
 

@@ -8,7 +8,6 @@ public class ControlaJogador : MonoBehaviour, IMatavel
     public AudioClip SomDano;
     public LayerMask MascaraChao;
     public LayerMask MascaraParede;
-    public GameObject TextoGameOver;
     public ControlaUI ScriptControlaUI;
     private Vector3 direcao;
     private Animator animator;
@@ -95,8 +94,6 @@ public class ControlaJogador : MonoBehaviour, IMatavel
 
     public void Morrer()
     {
-        Time.timeScale = 0;
-
-        TextoGameOver.SetActive(true);
+        ScriptControlaUI.GameOver();
     }
 }
