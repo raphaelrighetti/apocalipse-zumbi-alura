@@ -50,7 +50,7 @@ Qualquer propriedade da nossa classe que for pública irá aparecer na UI da Uni
 
 ============ANIMAÇÕES============
 
-Animações funcionam de maneira similar às animações na Godot, ou seja, podemos ter uma animação grandona com vários frames e dividí-la em vários animações menores.
+Animações funcionam de maneira similar às animações na Godot, ou seja, podemos ter uma animação grandona com vários frames e dividí-la em várias animações menores.
 
 Em vez de adicionar os frames um a um, podemos definir um começo e um fim para cada "Clip".
 
@@ -266,3 +266,50 @@ Precisa de um "Audio Listener" para ouvir esse "Audio Source", que já vem com a
 Nele podemos definir a rotação, que irá mudar a posição do "sol", a intensidade da luz, a cor da luz e outras coisas.
 
 É bem interessante de mexer.
+
+============Random.insideUnitSphere============
+
+É uma propriedade de Random que nos retorna um ponto aleatório (Vector3) dentro de uma esfera (aleatório no "y" também).
+
+Ele vem por padrão com o valor de raio como 1, mas podemos multiplicar esse Vector 3 para "aumentar o raio".
+
+Essa esfera tem como ponto inicial um "Vector3.zero", mas podemos fazer com que o ponto inicial seja o "transform.position" de algum objeto acrescentando o valor de "transform.position" do objeto que queremos no ponto aleatório gerado por esse método.
+
+============IGNORANDO LAYERS============
+
+Se queremos passar uma LayerMask para ser ignorada em um Raycast, por exemplo, podemos fazer isso passando o sinal "~" antes do nome da LayerMask quando formos passar o parâmetro.
+
+============COROUTINES============
+
+Coroutines no C# são muito úteis quando queremos executar algumas ações esperando determinado tempo ou um frame seguinte, no caso da Unity.
+
+Podemos fazer coroutines utilizando a interface "IEnumerator" como retorno de nossa coroutine, que nos retorna um "enumerator" (similar aos iterators), nos permitindo utilizar o "yield return", que irá retornar o nosso método e aguardar o frame seguinte para continuar onde tinha parado.
+
+Podemos utilizar "yield return"s em whiles e tudo mais, assim fazendo com que enquanto o código não saia do loop, ele ao menos espere o próximo frame para executar a ação do while novamente. Precisamos colocar um "yield return null;" no nosso while para que ele funcione dessa forma, assim como tornar o tipo do retorno do nosso método como "IEnumerator".
+
+Importante saber que precisamos executar o método com o método "StartCoroutine()" quando o método em questão é uma coroutine.
+
+============FONTES============
+
+Para utilizarmos outras fontes no nosso projeto, devemos ir em "Window -> TextMeshPro" e criar um novo asset de fonte para a nossa fonte em questão.
+
+============On Click ()============
+
+Podemos adicionar o método de algum script de algum objeto para ser rodado nessa propriedade dos nossos botões.
+
+Um exemplo de uso é o botão rodar o método reiniciar do nosso jogo.
+
+============Time.timeSinceLevelLoad============
+
+É uma propriedade de Time que nos retorna o tempo rodado desde o último carregamento da cena.
+
+O tempo é um float que representa os segundos. Para extrairmos os minutos, podemos dividir por 60. Para extrairmos os segundos restantes após os minutos, podemos tirar o módulo de 60.
+
+============PlayerPrefs============
+
+É uma classe que nos permite registrar de fato variáveis que permanecem mesmo depois do fechamento do nosso jogo.
+
+Possui método de Set, Get, Delete e etc.
+
+Muito útil para guardar a pontuação de um player, por exemplo.
+
